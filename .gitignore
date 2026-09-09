@@ -1,0 +1,25 @@
+# Linux kernel source tree (kept separate from repo; use patches/ to apply)
+linux/
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# C Kernel build artifacts
+*.o
+*.ko
+*.mod
+*.mod.c
+*.order
+*.symvers
+.tmp_versions/
+.cache.mk
+*.d
+
+# OS / Editor metadata
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

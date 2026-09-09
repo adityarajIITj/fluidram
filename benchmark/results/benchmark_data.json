@@ -1,0 +1,135 @@
+{
+  "metadata": {
+    "benchmark_suite": "FluidRAM vs Plain Linux Memory Subsystem Benchmark Suite v1.0",
+    "kernel_target": "Linux 6.x (drivers/block/fluidram)",
+    "timestamp": "2026-09-09T07:10:55Z",
+    "status": "PASSED - Bit-Exact Verification 100%"
+  },
+  "workload_1_overcommit": {
+    "workload": "1024 MB Overcommit on 256 MB Physical RAM",
+    "plain_linux": {
+      "requested_virtual_mb": 1024,
+      "physical_resident_mb": 256.0,
+      "effective_density": "3.93x",
+      "effective_density_float": 3.93,
+      "major_page_faults": 0,
+      "disk_io_wait_ms": 0.0,
+      "oom_kills": 0,
+      "process_survival_rate": "100.0%",
+      "write_latency_sec": 0.146,
+      "read_latency_sec": 0.001
+    },
+    "fluidram": {
+      "requested_virtual_mb": 1024,
+      "physical_resident_mb": 111.38,
+      "effective_density": "9.19x",
+      "effective_density_float": 9.19,
+      "major_page_faults": 0,
+      "disk_io_wait_ms": 0.0,
+      "oom_kills": 0,
+      "process_survival_rate": "100.0%",
+      "peer_borrows": 0,
+      "write_latency_sec": 0.936,
+      "read_latency_sec": 0.023
+    }
+  },
+  "workload_2_compression": {
+    "zero": {
+      "raw_kb": 800.0,
+      "plain_linux_zram": {
+        "compressed_kb": 9.38,
+        "ratio": "85.33x",
+        "ratio_float": 85.33,
+        "space_saving_pct": "98.8%",
+        "comp_speed_mb_s": 1096.5,
+        "decomp_latency_us": 1.77
+      },
+      "fluidram_galois": {
+        "compressed_kb": 2.34,
+        "ratio": "341.33x",
+        "ratio_float": 341.33,
+        "space_saving_pct": "99.7%",
+        "comp_speed_mb_s": 3435.6,
+        "decomp_latency_us": 1.98,
+        "bit_exact_verified": true
+      }
+    },
+    "sparse_heap": {
+      "raw_kb": 800.0,
+      "plain_linux_zram": {
+        "compressed_kb": 57.12,
+        "ratio": "14.00x",
+        "ratio_float": 14.0,
+        "space_saving_pct": "92.9%",
+        "comp_speed_mb_s": 617.2,
+        "decomp_latency_us": 3.82
+      },
+      "fluidram_galois": {
+        "compressed_kb": 84.65,
+        "ratio": "9.45x",
+        "ratio_float": 9.45,
+        "space_saving_pct": "89.4%",
+        "comp_speed_mb_s": 20.7,
+        "decomp_latency_us": 30.68,
+        "bit_exact_verified": true
+      }
+    },
+    "structured_code": {
+      "raw_kb": 800.0,
+      "plain_linux_zram": {
+        "compressed_kb": 256.62,
+        "ratio": "3.12x",
+        "ratio_float": 3.12,
+        "space_saving_pct": "67.9%",
+        "comp_speed_mb_s": 273.2,
+        "decomp_latency_us": 6.67
+      },
+      "fluidram_galois": {
+        "compressed_kb": 802.34,
+        "ratio": "1.00x",
+        "ratio_float": 1.0,
+        "space_saving_pct": "-0.3%",
+        "comp_speed_mb_s": 4.1,
+        "decomp_latency_us": 2.51,
+        "bit_exact_verified": true
+      }
+    },
+    "json_dom": {
+      "raw_kb": 800.0,
+      "plain_linux_zram": {
+        "compressed_kb": 38.15,
+        "ratio": "20.97x",
+        "ratio_float": 20.97,
+        "space_saving_pct": "95.2%",
+        "comp_speed_mb_s": 823.3,
+        "decomp_latency_us": 2.35
+      },
+      "fluidram_galois": {
+        "compressed_kb": 802.34,
+        "ratio": "1.00x",
+        "ratio_float": 1.0,
+        "space_saving_pct": "-0.3%",
+        "comp_speed_mb_s": 3.2,
+        "decomp_latency_us": 2.1,
+        "bit_exact_verified": true
+      }
+    }
+  },
+  "workload_3_thrashing": {
+    "workload": "Denning Working Set Inversion (200% RAM)",
+    "plain_linux": {
+      "access_count": 2000,
+      "total_latency_ms": 2.28,
+      "major_page_faults": 0,
+      "avg_latency_us": 1.14,
+      "thrashing_collapse": false
+    },
+    "fluidram": {
+      "access_count": 2000,
+      "total_latency_ms": 56.58,
+      "major_page_faults": 0,
+      "avg_latency_us": 28.29,
+      "thrashing_collapse": false
+    }
+  }
+}

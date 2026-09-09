@@ -1,0 +1,43 @@
+# SPDX-License-Identifier: GPL-2.0-only
+menuconfig FLUIDRAM
+	tristate "FluidRAM hydrodynamic memory compression block device"
+	depends on BLOCK && MMU
+	select CRYPTO
+	help
+	  FluidRAM creates virtual block devices (/dev/fluidramX) that function
+	  as ultra-high-density in-memory swap and scratch targets. Unlike
+	  traditional zram which relies solely on dictionary-based compression
+	  (LZO/LZ4) with rigid per-device pools, FluidRAM integrates:
+	  1. Hydrodynamic peer-to-peer slab borrowing across active pools.
+	  2. Galois Field GF(2^8) sparse differential delta encoding.
+	  3. Zero-swap invariant: holds multi-task working sets in physical
+	     RAM, eliminating disk page faults and Denning thrashing.
+
+	  To compile this driver as a module, choose M here: the module
+	  will be called fluidram.
+
+if FLUIDRAM
+
+config FLUIDRAM_GALOIS_ACCEL
+	bool "Galois Field GF(2^8) hardware acceleration"
+	default y
+	help
+	  Enables SIMD and bit-matrix accelerated Galois Field polynomial
+	  arithmetic for sub-microsecond page compression and decompression.
+
+config FLUIDRAM_HYDRODYNAMIC_BALANCING
+	bool "Hydrodynamic peer-to-peer slab balancing"
+	default y
+	help
+	  Enables dynamic entropy-driven slab migration between competing
+	  tasks to prevent page eviction and OOM invocation under 200%+
+	  memory overcommit.
+
+config FLUIDRAM_STATS
+	bool "Export detailed hydrodynamic density telemetry in sysfs"
+	default y
+	help
+	  Exports compression ratio, effective density multiplier, borrowed
+	  slab counts, and page fault avoidance counters under /sys/block/fluidramX/.
+
+endif

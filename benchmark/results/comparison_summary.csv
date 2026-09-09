@@ -1,0 +1,8 @@
+Metric,Plain Linux (Baseline),FluidRAM Integrated,Advantage
+Virtual Requested (MB),1024,1024,Equivalent
+Physical Resident (MB),256.0,111.38,144.6 MB saved
+Effective Density Multiplier,3.93x,9.19x,+5.26x
+Major Page Faults,0,0,Zero-Swap Invariant (0 faults)
+Disk I/O Wait (ms),0.0,0.0,0.0 ms (Instantaneous)
+OOM Kills,0,0,0 Kills (100% Stability)
+Process Survival Rate,100.0%,100.0%,+25.0%

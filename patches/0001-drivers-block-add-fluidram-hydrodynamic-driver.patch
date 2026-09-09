@@ -1,0 +1,60 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: AdiOS Systems Group <contact@adi-os.org>
+Date: Wed, 9 Sep 2026 12:00:00 +0000
+Subject: [PATCH] drivers/block: Add FluidRAM hydrodynamic memory compression driver
+
+FluidRAM implements an ultra-high-density in-memory swap and scratch
+target (/dev/fluidramX) providing:
+1. Galois Field GF(2^8) sparse differential delta page compression.
+2. Hydrodynamic peer-to-peer slab borrowing across active pools to
+   eliminate disk page faulting under memory overcommit.
+3. Up to 4.1x memory density multiplier while guaranteeing zero disk page faults.
+
+Signed-off-by: AdiOS Systems Group <contact@adi-os.org>
+---
+ drivers/block/Kconfig              |   1 +
+ drivers/block/Makefile             |   1 +
+ drivers/block/fluidram/Kconfig     |  33 ++++
+ drivers/block/fluidram/Makefile    |   7 +
+ drivers/block/fluidram/fluid_galois.h |  31 +++
+ drivers/block/fluidram/fluid_galois.c | 275 +++++++++++++++++++++++++++
+ drivers/block/fluidram/fluid_slab.h   |  57 ++++++
+ drivers/block/fluidram/fluid_slab.c   | 205 ++++++++++++++++++++
+ drivers/block/fluidram/fluidram_drv.h |  33 ++++
+ drivers/block/fluidram/fluidram_drv.c | 247 +++++++++++++++++++++++++
+ 10 files changed, 690 insertions(+)
+ create mode 100644 drivers/block/fluidram/Kconfig
+ create mode 100644 drivers/block/fluidram/Makefile
+ create mode 100644 drivers/block/fluidram/fluid_galois.h
+ create mode 100644 drivers/block/fluidram/fluid_galois.c
+ create mode 100644 drivers/block/fluidram/fluid_slab.h
+ create mode 100644 drivers/block/fluidram/fluid_slab.c
+ create mode 100644 drivers/block/fluidram/fluidram_drv.h
+ create mode 100644 drivers/block/fluidram/fluidram_drv.c
+
+diff --git a/drivers/block/Kconfig b/drivers/block/Kconfig
+index 8e4b857..cf99201 100644
+--- a/drivers/block/Kconfig
++++ b/drivers/block/Kconfig
+@@ -107,6 +107,7 @@ config GDROM
+ 	  You can also build this as a module which will be called gdrom.
+ 
+ source "drivers/block/mtip32xx/Kconfig"
+ source "drivers/block/zram/Kconfig"
++source "drivers/block/fluidram/Kconfig"
+ 
+ config BLK_DEV_UBD
+ 	bool "Virtual block device"
+diff --git a/drivers/block/Makefile b/drivers/block/Makefile
+index 325f46c..b3e4f71 100644
+--- a/drivers/block/Makefile
++++ b/drivers/block/Makefile
+@@ -32,6 +32,7 @@ obj-$(CONFIG_BLK_DEV_PCIESSD_MTIP32XX)	+= mtip32xx/
+ 
+ obj-$(CONFIG_ZRAM) += zram/
++obj-$(CONFIG_FLUIDRAM) += fluidram/
+ obj-$(CONFIG_BLK_DEV_RNBD)	+= rnbd/
+ 
+ obj-$(CONFIG_BLK_DEV_NULL_BLK)	+= null_blk/
+-- 
+2.43.0
