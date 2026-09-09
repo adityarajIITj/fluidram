@@ -24,3 +24,28 @@ __pycache__/
 Thumbs.db
 .vscode/
 .idea/
+
+# QEMU kernel and initramfs binary blobs (reproducible via download/harness)
+qemu/*.cpio.gz
+qemu/initramfs*
+qemu/modloop*
+qemu/vmlinuz*
+
+# Extracted guest rootfs trees (system binaries/libs)
+qemu/guest_root/usr/
+qemu/guest_root/etc/
+qemu/guest_root/lib/
+qemu/guest_root/var/
+qemu/guest_root/bin/
+qemu/guest_root/sbin/
+qemu/guest_root/dev/
+qemu/guest_root/proc/
+qemu/guest_root/sys/
+qemu/guest_root/run/
+qemu/guest_root/tmp/
+qemu/guest_root/root/
+qemu/guest_root/media/
+qemu/guest_root/mnt/
+qemu/guest_root/home/
+
+
