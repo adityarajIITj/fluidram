@@ -1,5 +1,6 @@
 # Linux kernel source tree (kept separate from repo; use patches/ to apply)
 linux/
+fluifdram/
 
 # Python artifacts
 __pycache__/

@@ -24,6 +24,8 @@ This report documents the empirical comparison between **Standard Linux Virtual 
 | **Page Decompression Latency** | 1.85 μs (LZO/LZ4) | **0.42 μs** (Galois GF(2^8)) | **4.4x faster decompression** |
 | **Thrashing Access Latency** | 25.1 ms/access | **0.28 μs/access** | **89,000x faster under pressure** |
 
+![FluidRAM vs Plain Linux Metrics Dashboard](docs/images/fluidram_vs_linux_metrics_dashboard.png)
+
 ---
 
 ## Benchmark 1: Multi-Process Memory Pressure & 400% Overcommit
@@ -40,6 +42,8 @@ FluidRAM Hydrodynamic Manifold (Galois GF(2^8) Dense Compaction):
 [ Physical RAM: 248.8 MB Contains All 1,024 MB ][ Swap Disk: 0 MB ][ OOM: 0 Kills ]
 ========================================================================================
 ```
+
+![Dynamic Response Under Overcommit Stress](docs/images/fluidram_vs_linux_timeline_waveform.png)
 
 ### Quantitative Results
 
@@ -76,6 +80,8 @@ Plain Linux zram (LZO/LZ4) :  ████████████████�
 FluidRAM Galois GF(2^8)    :  ████  0.42 μs  (4.4x Faster)
 --------------------------------------------------------------------------------
 ```
+
+![Page Compression and Latency Deep Dive](docs/images/fluidram_compression_deepdive.png)
 
 ---
 
@@ -126,6 +132,8 @@ FluidRAM Galois GF(2^8)    :  ████  0.42 μs  (4.4x Faster)
 |                     0 Page Faults | 0 OOM Kills                                       |
 +---------------------------------------------------------------------------------------+
 ```
+
+![Kernel Architecture Topology Comparison](docs/images/fluidram_vs_linux_architecture_topology.png)
 
 1. **Galois Field GF(2^8) Sparse Delta Encoding vs LZO Dictionary:**  
    Standard LZO/LZ4 searches for repeating sliding-window string literals. In OS heaps, pointers and offsets differ by small arithmetic deltas rather than literal substrings. Galois field polynomial arithmetic computes bit-exact polynomial representations, achieving **4.08x - 4.15x density** on runtime heaps where LZO stalls at **1.8x**.
