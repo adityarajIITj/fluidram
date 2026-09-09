@@ -115,6 +115,16 @@ cat /sys/block/fluidram0/borrow_count
 
 ---
 
+## Technical Documentation & Architecture Specification
+
+For in-depth systems architecture, mathematical formulations, latency derivations, and benchmark methodology:
+* **[Technical Architecture & Systems Specification](docs/TECHNICAL_SPECIFICATION.md)**: Formal specification of the Galois Field $GF(2^8)$ differential engine, hydrodynamic slab lending protocol, Void-Pipe bounded stream rasterization, closed manifold zero-swap invariant, and L1 scatter decompression mechanics.
+* **[Architecture Defense & Systems FAQ](docs/ARCHITECTURE_SPECIFICATION_AND_FAQ.md)**: Formal engineering rebuttals addressing bare-metal virtualization, empirical Galois compression integrity, zero-swap page fault invariants, and microkernel legitimacy.
+* **[Benchmark Report & Empirical Findings](BENCHMARK_REPORT.md)**: Quantitative methodology and results from QEMU Linux 6.6 bare-metal execution and multi-process stress suites.
+
+---
+
 ## License
 
 GNU General Public License v2.0 (GPL-2.0).
+
